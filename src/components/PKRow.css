@@ -1,0 +1,36 @@
+
+.pk-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    padding-top: 5px;
+}
+
+.pk-row.mastered .pk-id,
+.pk-row.mastered .pg-cnt {
+    color: #999;
+    text-decoration: line-through;
+}
+
+.pk-id {
+    padding: 0px;
+}
+
+.pk-input {
+    width: 100%;
+    padding: 0px;
+    font-size: 10px;
+    opacity: 70%;
+}
+
+.ctrl-icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
