@@ -5,9 +5,10 @@ import "./Card.css"
 
  
 
-function Card({student}) {
+function Card({key,student}) {
+    console.log("student:", JSON.stringify(student));
     const [pkValue, setPkValue] = useState("");
-    const [pkRows, setPkRows] = useState(student.pks);
+    const [pkRows, setPkRows] = useState(student.pks ?? []);
 
     const totalPages = pkRows.reduce((total, pk) => total + pk.count, 0);
 
@@ -17,8 +18,11 @@ function Card({student}) {
                 ? nextRowsOrUpdater(prevRows)
                 : nextRowsOrUpdater;
             student.pks = nextRows;
+            //save
+            chrome.storage.local.set({ [`student_${student.name}`]: nextRows });
             return nextRows;
         });
+        
     };
 
     const handleIncrementPK = (pkId) => {
@@ -37,7 +41,7 @@ function Card({student}) {
         updatePkRows(prevRows => prevRows.filter(pk => pk.id !== pkId));
     };
 
-    const pkOptions = student.pks.map(pk => <option value={pk.id}></option>);
+    const pkOptions = (student.pks ?? []).map(pk => <option value={pk.id}></option>);
     const handleAddPK = (e) => {
         e.preventDefault();
         if(!pkValue.trim()) return;
@@ -47,6 +51,10 @@ function Card({student}) {
         }
         setPkValue("");
         setPkRows([...student.pks]);
+        
+        if(student.tabId){
+            chrome.tabs.sendMessage(student.tabId, {action:"addPK",pk: pkValue});
+        }
     }
   return (
     <div className="card">

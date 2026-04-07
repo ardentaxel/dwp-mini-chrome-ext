@@ -1,14 +1,17 @@
 
 
 export default class Student {
-    constructor(name,pks){
+    constructor(name,tabId,pks){
         this.name = name;
         this.pks = pks;
+        this.tabId = tabId;
     }
 
     getName(){
         return this.name;
     }
+
+    
 
     getPageCount(){
         let count = 0;

@@ -1,0 +1,17 @@
+{
+  "name": "dwp-mini",
+  "description": "A mini version of DWP for tracking PKs",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "math_logo.png"
+  },
+  "permissions": ["activeTab", "scripting", "storage", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+   "host_permissions": [
+    "https://radius.mathnasium.com/*"
+  ]
+}
